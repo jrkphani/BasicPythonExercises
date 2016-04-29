@@ -46,6 +46,28 @@ import sys
 # Then print_words() and print_top() can just call the utility function.
 
 ###
+def helper(filename):
+  var_file = open(filename, 'rU')
+  text = var_file.read()
+  words = text.split()
+  dict_words = {}
+  for word in words:
+    if word in dict_words:
+      dict_words[word]+=1
+    else:
+      dict_words[word]=1
+  return dict_words
+
+def print_words(filename):
+  dict_words = helper(filename)
+  print dict_words.items
+  for k in dict_words:
+    print k , dict_words[k]
+
+def print_top(filename):
+  dict_words=helper(filename)
+  for key in sorted(dict_words, key = dict_words.get, reverse=True):
+    print key, dict_words[key]
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.

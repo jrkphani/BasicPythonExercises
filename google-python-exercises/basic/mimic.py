@@ -47,14 +47,36 @@ import sys
 
 def mimic_dict(filename):
   """Returns mimic dict mapping each word to list of words which follow it."""
-  # +++your code here+++
-  return
-
+  f = open(filename, 'rU')
+  str_AllWords = f.read().strip().lower().split()
+  f.close()
+  mimic_dict = {'': str_AllWords[0].split()}
+  for x in range(len(str_AllWords) - 1):
+      if str_AllWords[x] in mimic_dict:
+          if x == len(str_AllWords) - 1:
+              mimic_dict[str_AllWords[x]] = ''.split()
+          else:
+              # using split function to convert the datatype to list
+              mimic_dict[str_AllWords[x]] += str_AllWords[x + 1].split()
+      else:
+          if x == len(str_AllWords) - 1:
+              mimic_dict[str_AllWords[x]] = ''.split()
+          else:
+              mimic_dict[str_AllWords[x]] = str_AllWords[x + 1].split()
+  return mimic_dict
 
 def print_mimic(mimic_dict, word):
   """Given mimic dict and start word, prints 200 random words."""
   # +++your code here+++
-  return
+  str_Output = ''
+  for i in range(200):
+    if word in mimic_dict:
+      rng_Word = random.choice(mimic_dict[word])
+      str_Output += ' ' + rng_Word
+      word = rng_Word
+    else:
+      word = ''
+  print str_Output
 
 
 # Provided main(), calls mimic_dict() and mimic()
